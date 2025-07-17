@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagrama de Interacción de Especialidades Técnicas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .mermaid svg {
+            width: 100%;
+            height: auto;
+        }
+        /* Estilos personalizados para los tooltips de Mermaid */
+        .mermaid-tooltip {
+            font-family: 'Inter', sans-serif;
+            background-color: #1f2937; /* bg-gray-800 */
+            color: #f9fafb; /* text-gray-50 */
+            border: 1px solid #374151; /* border-gray-700 */
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            max-width: 350px;
+            text-align: left;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg w-full max-w-7xl border border-gray-200">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-2 text-center">Esquema de Interacción de Especialidades Técnicas</h1>
+        <p class="text-gray-600 mb-8 text-center max-w-3xl mx-auto">Este diagrama de flujo ilustra las dependencias y el orden de trabajo. <b>Pasa el cursor sobre cualquier nodo para ver más detalles.</b></p>
+        
+        <div class="flex justify-center">
+            <div class="mermaid w-full">
+                graph TD
+                    classDef estudios fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+                    classDef rector fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+                    classDef infraestructura fill:#ffedd5,stroke:#f97316,stroke-width:2px,color:#7c2d12;
+                    classDef soporte fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87;
+                    classDef gestion fill:#f1f5f9,stroke:#64748b,stroke-width:2px,color:#1e293b;
+                    classDef ambiental fill:#ccfbf1,stroke:#0d9488,stroke-width:2px,color:#0f766e;
+
+                    subgraph "Fase 1: Estudios de Base"
+                        A("Topografía")
+                        H("Geología y Geotecnia")
+                        J("Estudios Hidrológicos")
+                    end
+
+                    subgraph "Fase 2: Diseño Rector y de Infraestructura"
+                        B("Diseño Urbanístico y Arquitectura")
+                        C("Diseño Vial y Movimiento de Tierra")
+                        D("Diseño Eléctrico")
+                        E("Diseño de Drenaje Pluvial")
+                        F("Diseño Hidrosanitario")
+                        G("Estudio de Impacto Ambiental")
+                    end
+
+                    subgraph "Fase 3: Soporte e Integración Final"
+                        I("Diseño Estructural")
+                        K("Presupuesto y Planos Finales")
+                    end
+
+                    subgraph "Entidades de Supervisión"
+                        L("COORDINACIÓN GENERAL (INVUR)")
+                        M("PERMISOLOGÍA")
+                    end
+                    
+                    class A,H,J estudios;
+                    class B rector;
+                    class C,D,E,F infraestructura;
+                    class G ambiental;
+                    class I,K soporte;
+                    class L,M gestion;
+
+                    A --> B; A --> C; A --> D; A --> E; A --> F; A --> G;
+                    H --> B; H --> C; H --> E; H --> F; H --> I;
+                    J --> E; J --> F;
+                    B --> C; B --> D; B --> E; B --> F; B --> G; B --> K;
+                    C <--> E; C <--> F; C --> I; C --> K;
+                    D --> K;
+                    E --> I; E --> K;
+                    F --> I; F --> K;
+                    G --> K;
+                    I --> K;
+                    L --> A; L --> H; L --> J; L --> B; L --> G; L --> K;
+                    M <--> B; M <--> D; M <--> F; M <--> G;
+
+                    click A "javascript:void(0)" "Realizar el levantamiento planimétrico y altimétrico detallado del terreno. Es el lienzo base para todos los demás diseños."
+                    click H "javascript:void(0)" "Investigar la existencia de fallas, caracterizar los estratos del suelo, determinar su capacidad portante y localizar bancos de materiales. Define las restricciones y oportunidades del subsuelo."
+                    click J "javascript:void(0)" "Calcular los caudales de escorrentía pluvial e investigar las fuentes de agua subterránea para el abastecimiento. Es clave para el manejo del agua en el proyecto."
+                    click B "javascript:void(0)" "Como diseño rector, organiza el espacio: define la lotificación, la trama vial, áreas verdes y equipamiento, integrando el proyecto con el entorno. Dirige el trabajo de las especialidades de infraestructura."
+                    click C "javascript:void(0)" "Diseñar la geometría de calles, la estructura de pavimento y calcular el balance de corte y relleno para crear las terrazas de los lotes. Se coordina estrechamente con drenaje e hidrosanitario."
+                    click D "javascript:void(0)" "Diseñar la red de distribución eléctrica de media tensión y el sistema de alumbrado público para toda la urbanización, siguiendo el trazado vial y urbanístico."
+                    click E "javascript:void(0)" "Diseñar el sistema para manejar las aguas de lluvia (cauces, tuberías, cajas puente, etc.) para evitar inundaciones y garantizar la seguridad. Depende de la hidrología y se coordina con el diseño vial."
+                    click F "javascript:void(0)" "Diseñar la red de agua potable (pozos, tanques, SCI) y el sistema de recolección de aguas residuales (conexión a red, PTAR o STAR). Requiere aval de ENACAL."
+                    click G "javascript:void(0)" "Evalúa los posibles impactos del proyecto en todas sus facetas y propone medidas de mitigación para asegurar el cumplimiento de la normativa ambiental. Requiere resolución de MARENA."
+                    click I "javascript:void(0)" "Realizar el cálculo y diseño detallado de todas las obras civiles que lo requieran: muros, cimentaciones, tanques de agua, puentes, etc. Da soporte a las demás ingenierías."
+                    click K "javascript:void(0)" "Integrar todos los diseños y especificaciones en un paquete de planos constructivos final. Elaborar el presupuesto detallado del proyecto, incluyendo costos y volúmenes de obra."
+                    click L "javascript:void(0)" "Supervisar el avance general del proyecto, revisar la calidad de los productos y asegurar la correcta interacción entre disciplinas."
+                    click M "javascript:void(0)" "Gestionar y obtener todas las aprobaciones, avales y permisos necesarios de las instituciones reguladoras (INETER, ENACAL, MARENA, Alcaldías) para garantizar la viabilidad del proyecto."
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inicializa Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            flowchart: {
+                ranksep: 70
+            }
+        });
+    </script>
+</body>
+</html>
